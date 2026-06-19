@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-
+import "./ProductDetails.css"
 import products from "../../data/products.json";
 
 function ProductDetails() {
@@ -17,30 +17,49 @@ function ProductDetails() {
   }
 
   return (
-    <div>
+  <section className="pdp">
 
-      <h1>{product.name}</h1>
+    <div className="pdp-image">
 
       <img
         src={product.thumbnail}
         alt={product.name}
-        width="300"
       />
 
-      <p>
-        ₹{product.price}
+    </div>
+
+    <div className="pdp-info">
+
+      <h1>{product.name}</h1>
+
+      <p className="pdp-rating">
+        ⭐ {product.rating}
       </p>
 
-      <p>
-        ⭐ {product.rating}
+      <p className="pdp-price">
+        ₹{product.price}
       </p>
 
       <p>
         {product.description}
       </p>
 
+      <div className="pdp-buttons">
+
+          <button className="btn-primary">
+            Add To Cart
+          </button>
+
+          <button className="btn-secondary">
+            Wishlist
+          </button>
+
+      </div>
+
     </div>
-  );
+
+  </section>
+);
 }
 
 export default ProductDetails;
