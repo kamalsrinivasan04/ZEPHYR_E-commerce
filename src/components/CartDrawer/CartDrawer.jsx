@@ -7,13 +7,15 @@ function CartDrawer({ isOpen, onClose }) {
 
   const {
     cartItems,
-    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
   } = useContext(CartContext);
 
   const totalPrice =
     cartItems.reduce(
       (total, item) =>
-        total + item.price,
+        total +
+        item.price * item.quantity,
       0
     );
 
@@ -23,11 +25,12 @@ function CartDrawer({ isOpen, onClose }) {
         isOpen ? "open" : ""
       }`}
     >
+
       <div className="cart-header">
         <h2>Your Cart</h2>
 
         <button onClick={onClose}>
-          X
+          ✕
         </button>
       </div>
 
@@ -36,29 +39,57 @@ function CartDrawer({ isOpen, onClose }) {
         {cartItems.length === 0 ? (
           <p>Cart is Empty</p>
         ) : (
-          cartItems.map(
-            (item, index) => (
-              <div
-                key={index}
-                className="cart-item"
-              >
-                <p>{item.name}</p>
+          cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="cart-item"
+            >
 
-                <p>
-                  ₹{item.price}
-                </p>
+              <h4>{item.name}</h4>
+
+              <p>
+                ₹{item.price}
+              </p>
+
+              <div className="quantity-controls">
 
                 <button
-                  className="remove-btn"
                   onClick={() =>
-                    removeFromCart(index)
+                    decreaseQuantity(
+                      item.id
+                    )
                   }
                 >
-                  Remove
+                  -
                 </button>
+
+                <span>
+                  {item.quantity}
+                </span>
+
+                <button
+                  onClick={() =>
+                    increaseQuantity(
+                      item.id
+                    )
+                  }
+                >
+                  +
+                </button>
+
               </div>
-            )
-          )
+
+              <p className="subtotal">
+                Subtotal:
+                ₹
+                {
+                  item.price *
+                  item.quantity
+                }
+              </p>
+
+            </div>
+          ))
         )}
 
       </div>
@@ -66,14 +97,15 @@ function CartDrawer({ isOpen, onClose }) {
       <div className="cart-footer">
 
         <h3>
-          Total ₹{totalPrice}
+          Total: ₹{totalPrice}
         </h3>
 
-        <button>
+        <button className="checkout-btn">
           Checkout
         </button>
 
       </div>
+
     </div>
   );
 }

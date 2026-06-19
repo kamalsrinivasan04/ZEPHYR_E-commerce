@@ -11,12 +11,22 @@ function ProductDetails() {
 
   const { id } = useParams();
 
-  const { addToCart } =
-    useContext(CartContext);
+  const {
+  addToCart,
+  cartItems,
+  increaseQuantity,
+  decreaseQuantity,
+  } = useContext(CartContext);
 
   const product = products.find(
     (item) =>
       item.id === Number(id)
+  );
+
+  const cartItem =
+  cartItems.find(
+    (item) =>
+      item.id === product?.id
   );
 
   if (!product) {
@@ -53,14 +63,52 @@ function ProductDetails() {
 
         <div className="pdp-buttons">
 
-          <button
-            className="btn-primary"
-            onClick={() =>
-              addToCart(product)
-            }
-          >
-            Add To Cart
-          </button>
+          <div className="pdp-cart-controls">
+
+          {!cartItem ? (
+
+            <button
+              className="btn-primary"
+              onClick={() =>
+                addToCart(product)
+              }
+            >
+              Add To Cart
+            </button>
+
+          ) : (
+
+            <div className="quantity-controls">
+
+              <button
+                onClick={() =>
+                  decreaseQuantity(
+                    product.id
+                  )
+                }
+              >
+                -
+              </button>
+
+              <span>
+                {cartItem.quantity}
+              </span>
+
+              <button
+                onClick={() =>
+                  increaseQuantity(
+                    product.id
+                  )
+                }
+              >
+                +
+              </button>
+
+            </div>
+
+          )}
+
+        </div>
 
           <button
             className="btn-secondary"

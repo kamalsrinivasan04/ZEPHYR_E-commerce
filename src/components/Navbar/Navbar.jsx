@@ -5,15 +5,18 @@ import {CartContext} from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
 import {
+  ThemeContext,
+} from "../../context/ThemeContext";
+
+import {
   FaHeart,
   FaShoppingCart,
   FaSearch,
-  FaMoon
+  FaMoon,
+  FaSun
 } from "react-icons/fa";
 
 import "./Navbar.css";
-import "./Navbar.css";
-
 
 function Navbar({ openCart }) {
   const { cartItems } = useContext(CartContext);
@@ -70,7 +73,13 @@ function Navbar({ openCart }) {
         >
             <FaShoppingCart />
             <span className="cart-count">
-              {cartItems.length}
+            {
+              cartItems.reduce(
+                (total, item) =>
+                  total + item.quantity,
+                0
+              )
+            }
             </span>
         </button>
 
