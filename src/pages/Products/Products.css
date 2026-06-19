@@ -1,0 +1,15 @@
+/* .category-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  margin:2rem 0;
+}
+
+.category-filters button{
+  padding:0.8rem 1.2rem;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+} */
