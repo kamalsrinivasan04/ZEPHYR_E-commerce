@@ -1,3 +1,7 @@
+import { useContext } from "react";
+
+import {CartContext} from "../../context/CartContext";
+
 import { Link } from "react-router-dom";
 
 import {
@@ -11,7 +15,8 @@ import "./Navbar.css";
 import "./Navbar.css";
 
 
-function Navbar() {
+function Navbar({ openCart }) {
+  const { cartItems } = useContext(CartContext);
   return (
     <nav className="navbar">
 
@@ -56,9 +61,13 @@ function Navbar() {
             <FaHeart />
         </Link>
 
-        <button className="nav-icon">
+        <button
+          className="nav-icon"
+          onClick={openCart}
+        >
             <FaShoppingCart />
-            <span className="cart-count"> 0 
+            <span className="cart-count">
+              {cartItems.length}
             </span>
         </button>
 
