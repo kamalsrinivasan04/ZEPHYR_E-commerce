@@ -1,5 +1,6 @@
 import "./ProductSection.css";
 import products from "../../data/products.json";
+import ProductCard from "../ProductCard/ProductCard";
 
 function ProductSection() {
 
@@ -17,29 +18,11 @@ function ProductSection() {
 
         {featuredProducts.map((product) => (
 
-          <div
-            key={product.id}
-            className="product-card"
-          >
-
-            <img
-              src={product.thumbnail}
-              alt={product.name}
+            <ProductCard
+                key={product.id}
+                product={product}
             />
-
-            <h3>{product.name}</h3>
-
-            <p className="price">
-              ₹{product.price}
-            </p>
-
-            <p className="rating">
-              ⭐ {product.rating}
-            </p>
-
-          </div>
-
-        ))}
+            ))}
 
       </div>
 

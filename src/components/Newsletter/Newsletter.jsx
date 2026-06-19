@@ -2,6 +2,7 @@ import "./Newsletter.css";
 
 function Newsletter() {
   return (
+    
     <section className="newsletter">
 
       <h2>Stay Updated</h2>
