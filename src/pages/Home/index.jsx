@@ -1,5 +1,15 @@
+import HeroSection from "../../components/HeroSection/HeroSection";
+import CategorySection from "../../components/CategorySection/CategorySection";
+import ProductSection from "../../components/ProductSection/ProductSection";
+
 function Home() {
-  return <h1>Home Page</h1>;
+  return (
+    <>
+      <HeroSection />
+      <CategorySection />
+      <ProductSection />
+    </>
+  );
 }
 
 export default Home;
