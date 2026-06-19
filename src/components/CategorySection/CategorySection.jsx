@@ -1,4 +1,5 @@
 import "./CategorySection.css";
+import { useNavigate } from "react-router-dom";
 
 function CategorySection() {
 
@@ -24,6 +25,11 @@ function CategorySection() {
           <div
             key={category}
             className="category-card"
+            onClick={() =>
+              navigate(
+                `/products?category=${category}`
+              )
+            }
           >
             {category}
           </div>

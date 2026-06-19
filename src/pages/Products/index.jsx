@@ -1,5 +1,6 @@
 import { useState } from "react";
 import products from "../../data/products.json";
+import "./Products.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
 
 function Products() {
@@ -54,9 +55,18 @@ function Products() {
         padding: "4rem",
       }}
     >
-      <h1>All Products</h1>
+      <h1>
+        {selectedCategory === "All"
+          ? "All Products"
+          : `${selectedCategory} Products`}
+      </h1>
+
+      <p className="products-subtitle">
+        Showing {filteredProducts.length} products
+      </p>
 
       <input
+        className="search-input"
         type="text"
         placeholder="Search products..."
         value={searchTerm}
@@ -67,8 +77,13 @@ function Products() {
 
       <div className="category-filters">
         {categories.map((category) => (
-          <button
-            key={category}
+        <button
+          key={category}
+          className={
+            selectedCategory === category
+              ? "category-btn active"
+              : "category-btn"
+          }
             onClick={() =>
               setSelectedCategory(category)
             }
@@ -78,12 +93,9 @@ function Products() {
         ))}
       </div>
 
-      <div
-        style={{
-          margin: "2rem 0",
-        }}
-      >
+      <div className="sort-container">
         <select
+          className="sort-select"
           value={sortOption}
           onChange={(e) =>
             setSortOption(e.target.value)

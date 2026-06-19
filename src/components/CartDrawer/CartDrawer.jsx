@@ -5,8 +5,10 @@ import "./CartDrawer.css";
 
 function CartDrawer({ isOpen, onClose }) {
 
-  const { cartItems } =
-    useContext(CartContext);
+  const {
+    cartItems,
+    removeFromCart,
+  } = useContext(CartContext);
 
   const totalPrice =
     cartItems.reduce(
@@ -21,36 +23,42 @@ function CartDrawer({ isOpen, onClose }) {
         isOpen ? "open" : ""
       }`}
     >
-
       <div className="cart-header">
-
         <h2>Your Cart</h2>
 
         <button onClick={onClose}>
           X
         </button>
-
       </div>
 
       <div className="cart-items">
 
         {cartItems.length === 0 ? (
-          <p>
-            Cart is Empty
-          </p>
+          <p>Cart is Empty</p>
         ) : (
-          cartItems.map((item, index) => (
-            <div
-              key={index}
-              className="cart-item"
-            >
-              <p>{item.name}</p>
+          cartItems.map(
+            (item, index) => (
+              <div
+                key={index}
+                className="cart-item"
+              >
+                <p>{item.name}</p>
 
-              <p>
-                ₹{item.price}
-              </p>
-            </div>
-          ))
+                <p>
+                  ₹{item.price}
+                </p>
+
+                <button
+                  className="remove-btn"
+                  onClick={() =>
+                    removeFromCart(index)
+                  }
+                >
+                  Remove
+                </button>
+              </div>
+            )
+          )
         )}
 
       </div>
@@ -66,7 +74,6 @@ function CartDrawer({ isOpen, onClose }) {
         </button>
 
       </div>
-
     </div>
   );
 }

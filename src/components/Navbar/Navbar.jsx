@@ -50,9 +50,12 @@ function Navbar({ openCart }) {
 
     <div className="navbar-actions">
 
-        <button className="nav-icon">
-            <FaSearch />
-        </button>
+        <Link
+          to="/products"
+          className="nav-icon"
+        >
+          <FaSearch />
+        </Link>
 
         <Link
             to="/wishlist"
@@ -71,8 +74,13 @@ function Navbar({ openCart }) {
             </span>
         </button>
 
-        <button className="nav-icon">
-            <FaMoon />
+        <button
+          className="nav-icon"
+          onClick={() =>
+            alert("Dark Mode Coming Soon")
+          }
+        >
+          <FaMoon />
         </button>
 
     </div>

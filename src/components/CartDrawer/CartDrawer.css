@@ -56,3 +56,19 @@
 
   border-top:1px solid #ddd;
 }
+
+.remove-btn{
+  margin-top:10px;
+
+  border:none;
+
+  padding:8px 12px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+
+  background:#ef4444;
+
+  color:white;
+}
