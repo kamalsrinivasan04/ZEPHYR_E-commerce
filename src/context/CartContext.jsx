@@ -37,24 +37,86 @@ export function CartProvider({
     product
   ) => {
 
-    setCartItems(
-      (prevItems) => [
+    setCartItems((prevItems) => {
+
+      const existingItem =
+        prevItems.find(
+          (item) =>
+            item.id === product.id
+        );
+
+      if (existingItem) {
+
+        return prevItems.map(
+          (item) =>
+            item.id === product.id
+              ? {
+                  ...item,
+                  quantity:
+                    item.quantity + 1,
+                }
+              : item
+        );
+      }
+
+      return [
         ...prevItems,
-        product,
-      ]
+        {
+          ...product,
+          quantity: 1,
+        },
+      ];
+    });
+  };
+
+  const increaseQuantity = (
+    id
+  ) => {
+
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity:
+                item.quantity + 1,
+            }
+          : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (
+    id
+  ) => {
+
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                quantity:
+                  item.quantity - 1,
+              }
+            : item
+        )
+        .filter(
+          (item) =>
+            item.quantity > 0
+        )
     );
   };
 
   const removeFromCart = (
-    index
+    id
   ) => {
 
-    setCartItems(
-      (prevItems) =>
-        prevItems.filter(
-          (_, i) =>
-            i !== index
-        )
+    setCartItems((prevItems) =>
+      prevItems.filter(
+        (item) =>
+          item.id !== id
+      )
     );
   };
 
@@ -63,6 +125,8 @@ export function CartProvider({
       value={{
         cartItems,
         addToCart,
+        increaseQuantity,
+        decreaseQuantity,
         removeFromCart,
       }}
     >
