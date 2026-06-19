@@ -1,4 +1,8 @@
-import { createContext, useState } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 
 export const CartContext =
   createContext();
@@ -6,14 +10,52 @@ export const CartContext =
 export function CartProvider({
   children,
 }) {
-  const [cartItems, setCartItems] =
-    useState([]);
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => [
-      ...prevItems,
-      product,
-    ]);
+  const [cartItems, setCartItems] =
+    useState(() => {
+
+      const savedCart =
+        localStorage.getItem(
+          "zephyr-cart"
+        );
+
+      return savedCart
+        ? JSON.parse(savedCart)
+        : [];
+    });
+
+  useEffect(() => {
+
+    localStorage.setItem(
+      "zephyr-cart",
+      JSON.stringify(cartItems)
+    );
+
+  }, [cartItems]);
+
+  const addToCart = (
+    product
+  ) => {
+
+    setCartItems(
+      (prevItems) => [
+        ...prevItems,
+        product,
+      ]
+    );
+  };
+
+  const removeFromCart = (
+    index
+  ) => {
+
+    setCartItems(
+      (prevItems) =>
+        prevItems.filter(
+          (_, i) =>
+            i !== index
+        )
+    );
   };
 
   return (
@@ -21,6 +63,7 @@ export function CartProvider({
       value={{
         cartItems,
         addToCart,
+        removeFromCart,
       }}
     >
       {children}
