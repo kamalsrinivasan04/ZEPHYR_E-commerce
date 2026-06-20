@@ -1,4 +1,4 @@
-/* Global variable  for  styling */
+/* Global Variables */
 
 :root{
   --primary:#007979;
@@ -17,6 +17,8 @@
   --warning:#F59E0B;
   --error:#EF4444;
 
+  --border:#E2E8F0;
+
   --shadow:0 4px 12px rgba(0,0,0,0.1);
 
   --radius:12px;
@@ -24,32 +26,42 @@
   --transition:all 0.3s ease;
 }
 
+
+/* Dark Theme */
+
 body.dark{
 
   --primary:#24B1B1;
-
   --secondary:#007979;
 
   --background:#0F172A;
-
   --accent:#1E293B;
 
   --heading:#F8FAFC;
-
   --body:#CBD5E1;
 
   --surface:#1E293B;
-
   --surface-alt:#334155;
+
+  --border:#475569;
+
+  --shadow:0 4px 20px rgba(0,0,0,0.4);
 }
 
-/* Actual Styling */
+
+/* Reset */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
+
+
+html{
+  scroll-behavior:smooth;
+}
+
 
 body{
   font-family:Inter,sans-serif;
@@ -58,36 +70,66 @@ body{
 
   color:var(--body);
 
-  transition:all 0.3s ease;
+  transition:var(--transition);
+
+  min-height:100vh;
 }
+
 
 a{
   text-decoration:none;
   color:inherit;
 }
 
+
 ul{
   list-style:none;
 }
+
 
 img{
   max-width:100%;
   display:block;
 }
 
+
+button,
+input,
+select{
+  font-family:inherit;
+}
+
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-  color: var(--heading);
-  font-family: Poppins, sans-serif;
+h6{
+  color:var(--heading);
+
+  font-family:Poppins,sans-serif;
 }
+
 
 p,
 span,
-li {
-  color: var(--body);
+li{
+  color:var(--body);
 }
 
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--surface);
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:20px;
+}

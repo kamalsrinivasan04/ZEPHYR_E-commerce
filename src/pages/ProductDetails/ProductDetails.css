@@ -3,18 +3,27 @@
 
   display:grid;
 
-  grid-template-columns:
-  1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
-  gap:3rem;
+  gap:4rem;
+
+  align-items:center;
 }
 
 .pdp-image img{
   width:100%;
 
-  border-radius:var(--radius);
+  border-radius:20px;
 
   box-shadow:var(--shadow);
+
+  border:1px solid var(--border);
+
+  transition:var(--transition);
+}
+
+.pdp-image img:hover{
+  transform:scale(1.02);
 }
 
 .pdp-info{
@@ -22,7 +31,13 @@
 
   flex-direction:column;
 
-  gap:1rem;
+  gap:1.25rem;
+}
+
+.pdp-info h1{
+  font-size:2.5rem;
+
+  line-height:1.2;
 }
 
 .pdp-price{
@@ -36,13 +51,23 @@
 .pdp-rating{
   color:#f59e0b;
 
+  font-size:1.1rem;
+
   font-weight:600;
+}
+
+.pdp-info p{
+  line-height:1.8;
 }
 
 .pdp-buttons{
   display:flex;
 
+  align-items:center;
+
   gap:1rem;
+
+  flex-wrap:wrap;
 
   margin-top:1rem;
 }
@@ -59,6 +84,14 @@
   border-radius:var(--radius);
 
   cursor:pointer;
+
+  font-weight:600;
+
+  transition:var(--transition);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
 }
 
 .btn-secondary{
@@ -73,10 +106,22 @@
   border-radius:var(--radius);
 
   cursor:pointer;
+
+  font-weight:600;
+
+  transition:var(--transition);
+}
+
+.btn-secondary:hover{
+  background:var(--primary);
+
+  color:white;
 }
 
 .pdp-cart-controls{
-  margin-top:20px;
+  display:flex;
+
+  align-items:center;
 }
 
 .quantity-controls{
@@ -88,9 +133,9 @@
 }
 
 .quantity-controls button{
-  width:40px;
+  width:42px;
 
-  height:40px;
+  height:42px;
 
   border:none;
 
@@ -105,6 +150,12 @@
   font-size:1.2rem;
 
   font-weight:600;
+
+  transition:var(--transition);
+}
+
+.quantity-controls button:hover{
+  transform:scale(1.05);
 }
 
 .quantity-controls span{
@@ -114,5 +165,40 @@
 
   font-size:1.1rem;
 
-  font-weight:600;
+  font-weight:700;
+}
+
+
+/* Responsive */
+
+@media(max-width:900px){
+
+  .pdp{
+    grid-template-columns:1fr;
+
+    padding:3rem 2rem;
+  }
+
+  .pdp-info h1{
+    font-size:2rem;
+  }
+}
+
+@media(max-width:576px){
+
+  .pdp{
+    padding:2rem 1rem;
+  }
+
+  .pdp-buttons{
+    flex-direction:column;
+
+    align-items:stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary{
+    width:100%;
+  }
+
 }

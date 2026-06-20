@@ -3,7 +3,11 @@ import { useParams } from "react-router-dom";
 
 import products from "../../data/products.json";
 
-import { CartContext } from "../../context/CartContext";
+import { CartContext }
+  from "../../context/CartContext";
+
+import { WishlistContext }
+  from "../../context/WishlistContext";
 
 import "./ProductDetails.css";
 
@@ -12,11 +16,18 @@ function ProductDetails() {
   const { id } = useParams();
 
   const {
-  addToCart,
-  cartItems,
-  increaseQuantity,
-  decreaseQuantity,
+    addToCart,
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
   } = useContext(CartContext);
+
+  const {
+    toggleWishlist,
+    isWishlisted,
+  } = useContext(
+    WishlistContext
+  );
 
   const product = products.find(
     (item) =>
@@ -24,16 +35,21 @@ function ProductDetails() {
   );
 
   const cartItem =
-  cartItems.find(
-    (item) =>
-      item.id === product?.id
-  );
+    cartItems.find(
+      (item) =>
+        item.id === product?.id
+    );
 
   if (!product) {
-    return <h1>Product Not Found</h1>;
+    return (
+      <h1>
+        Product Not Found
+      </h1>
+    );
   }
 
   return (
+
     <section className="pdp">
 
       <div className="pdp-image">
@@ -44,6 +60,7 @@ function ProductDetails() {
         />
 
       </div>
+
 
       <div className="pdp-info">
 
@@ -61,59 +78,81 @@ function ProductDetails() {
           {product.description}
         </p>
 
+
         <div className="pdp-buttons">
 
           <div className="pdp-cart-controls">
 
-          {!cartItem ? (
-
-            <button
-              className="btn-primary"
-              onClick={() =>
-                addToCart(product)
-              }
-            >
-              Add To Cart
-            </button>
-
-          ) : (
-
-            <div className="quantity-controls">
+            {!cartItem ? (
 
               <button
+                className="btn-primary"
                 onClick={() =>
-                  decreaseQuantity(
-                    product.id
-                  )
+                  addToCart(product)
                 }
               >
-                -
+
+                Add To Cart
+
               </button>
 
-              <span>
-                {cartItem.quantity}
-              </span>
+            ) : (
 
-              <button
-                onClick={() =>
-                  increaseQuantity(
-                    product.id
-                  )
-                }
+              <div
+                className="quantity-controls"
               >
-                +
-              </button>
 
-            </div>
+                <button
+                  onClick={() =>
+                    decreaseQuantity(
+                      product.id
+                    )
+                  }
+                >
+                  -
+                </button>
 
-          )}
+                <span>
+                  {cartItem.quantity}
+                </span>
 
-        </div>
+                <button
+                  onClick={() =>
+                    increaseQuantity(
+                      product.id
+                    )
+                  }
+                >
+                  +
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
 
           <button
+
             className="btn-secondary"
+
+            onClick={() =>
+              toggleWishlist(
+                product
+              )
+            }
+
           >
-            Wishlist
+
+            {isWishlisted(
+              product.id
+            )
+
+              ? "Remove Wishlist"
+
+              : "Add Wishlist"}
+
           </button>
 
         </div>
