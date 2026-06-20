@@ -24,6 +24,25 @@
   --transition:all 0.3s ease;
 }
 
+body.dark{
+
+  --primary:#24B1B1;
+
+  --secondary:#007979;
+
+  --background:#0F172A;
+
+  --accent:#1E293B;
+
+  --heading:#F8FAFC;
+
+  --body:#CBD5E1;
+
+  --surface:#1E293B;
+
+  --surface-alt:#334155;
+}
+
 /* Actual Styling */
 
 *{
@@ -34,8 +53,12 @@
 
 body{
   font-family:Inter,sans-serif;
+
   background:var(--background);
+
   color:var(--body);
+
+  transition:all 0.3s ease;
 }
 
 a{
@@ -67,3 +90,4 @@ span,
 li {
   color: var(--body);
 }
+

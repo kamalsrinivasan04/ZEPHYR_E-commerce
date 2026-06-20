@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 
 import {CartContext} from "../../context/CartContext";
 
@@ -20,6 +20,23 @@ import "./Navbar.css";
 
 function Navbar({ openCart }) {
   const { cartItems } = useContext(CartContext);
+  const {
+  darkMode,
+  toggleTheme,
+  } = useContext(ThemeContext);
+  const [showCategories, setShowCategories] =
+  useState(false);
+
+  const categories = [
+    "Audio",
+    "Mobile Devices",
+    "Wearables",
+    "Computing",
+    "Smart Home",
+    "Accessories",
+    "Gaming",
+    "Entertainment",
+  ];
   return (
     <nav className="navbar">
 
@@ -43,10 +60,42 @@ function Navbar({ openCart }) {
           </Link>
         </li>
 
-        <li>
-          <Link to="#">
-            Categories
-          </Link>
+        <li
+          className="categories-menu"
+          onMouseEnter={() =>
+            setShowCategories(true)
+          }
+          onMouseLeave={() =>
+            setShowCategories(false)
+          }
+        >
+
+          <span>
+            Categories ▼
+          </span>
+
+          {showCategories && (
+            <div className="dropdown-menu">
+
+              {categories.map(
+                (category) => (
+
+                  <Link
+                    key={category}
+                    to={`/products?category=${encodeURIComponent(
+                      category
+                    )}`}
+                    className="dropdown-item"
+                  >
+                    {category}
+                  </Link>
+
+                )
+              )}
+
+            </div>
+          )}
+
         </li>
 
       </ul>
@@ -85,11 +134,14 @@ function Navbar({ openCart }) {
 
         <button
           className="nav-icon"
-          onClick={() =>
-            alert("Dark Mode Coming Soon")
-          }
+          onClick={toggleTheme}
         >
-          <FaMoon />
+
+          {darkMode
+            ? <FaSun />
+            : <FaMoon />
+          }
+
         </button>
 
     </div>
