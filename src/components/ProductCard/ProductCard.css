@@ -61,3 +61,45 @@
 
   font-weight:600;
 }
+
+.price-section{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:0 1rem 1rem;
+
+  flex-wrap:wrap;
+}
+
+.sale-price{
+  font-size:1.2rem;
+
+  font-weight:700;
+
+  color:var(--primary);
+}
+
+.mrp-price{
+  font-size:0.9rem;
+
+  color:#888;
+
+  text-decoration:line-through;
+}
+
+.discount-badge{
+  background:#22c55e;
+
+  color:white;
+
+  padding:4px 8px;
+
+  border-radius:20px;
+
+  font-size:0.75rem;
+
+  font-weight:600;
+}

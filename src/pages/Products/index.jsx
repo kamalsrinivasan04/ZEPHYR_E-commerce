@@ -28,7 +28,7 @@ function Products() {
   const [sortOption,
     setSortOption] =
     useState("default");
-
+ 
   useEffect(() => {
 
     if(categoryFromURL){
