@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+
+import axios from "axios";
+
 import {
   FaChevronLeft,
   FaChevronRight,
   FaTimes
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-
-import products from "../../data/products.json";
 
 import { CartContext }
   from "../../context/CartContext";
@@ -34,10 +35,34 @@ function ProductDetails() {
     WishlistContext
   );
 
-  const product = products.find(
-    (item) =>
-      item.id === Number(id)
-  );
+  const [product,
+  setProduct] =
+  useState(null);
+
+  useEffect(() => {
+
+    axios
+
+      .get(
+        `http://localhost:5000/api/products/${id}`
+      )
+
+      .then((response) => {
+
+        setProduct(
+          response.data
+        );
+
+      })
+
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, [id]);
+
   const [selectedImage,
   setSelectedImage] =
   useState(0);
@@ -52,13 +77,11 @@ function ProductDetails() {
         item.id === product?.id
     );
 
-  if (!product) {
-    return (
-      <h1>
-        Product Not Found
-      </h1>
-    );
-  }
+    if (!product) {
+
+    return <h1> Product Not Found </h1>;
+
+    }
 
   return (
 

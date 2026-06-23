@@ -70,9 +70,13 @@ body{
 
   color:var(--body);
 
-  transition:var(--transition);
+  transition:all 0.3s ease;
 
   min-height:100vh;
+
+  display:flex;
+
+  flex-direction:column;
 }
 
 
@@ -132,4 +136,16 @@ li{
 ::-webkit-scrollbar-thumb{
   background:var(--primary);
   border-radius:20px;
+}
+
+#root{
+  min-height:100vh;
+
+  display:flex;
+
+  flex-direction:column;
+}
+
+.app-content{
+  flex:1;
 }

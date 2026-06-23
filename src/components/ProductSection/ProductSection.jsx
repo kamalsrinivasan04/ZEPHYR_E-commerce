@@ -1,32 +1,68 @@
 import "./ProductSection.css";
-import products from "../../data/products.json";
+
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+
 import ProductCard from "../ProductCard/ProductCard";
 
 function ProductSection() {
 
-  const featuredProducts =
-    products.filter(
-      (product) => product.featured
-    );
+  const [products, setProducts] =
+    useState([]);
+
+  useEffect(() => {
+
+    axios
+      .get(
+        "http://localhost:5000/api/products"
+      )
+
+      .then((response) => {
+
+        const featuredProducts =
+          response.data.filter(
+            (product) =>
+              product.featured
+          );
+
+        setProducts(
+          featuredProducts
+        );
+
+      })
+
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, []);
 
   return (
+
     <section className="products-section">
 
-      <h2>Featured Products</h2>
+      <h2>
+        Featured Products
+      </h2>
 
       <div className="products-grid">
 
-        {featuredProducts.map((product) => (
+        {products.map((product) => (
 
-            <ProductCard
-                key={product.id}
-                product={product}
-            />
-            ))}
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
+
+        ))}
 
       </div>
 
     </section>
+
   );
 }
 

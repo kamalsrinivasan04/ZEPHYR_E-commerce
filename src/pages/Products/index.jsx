@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import products from "../../data/products.json";
+import axios from "axios";
 
 import ProductCard from "../../components/ProductCard/ProductCard";
 
@@ -63,6 +63,33 @@ function Products() {
     "Entertainment",
   ];
 
+  const [products,
+  setProducts] =
+  useState([]);
+
+  useEffect(() => {
+
+    axios
+
+      .get(
+        "http://localhost:5000/api/products"
+      )
+
+      .then((response) => {
+
+        setProducts(
+          response.data
+        );
+
+      })
+
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, []);
 
   const filteredProducts =
     products
